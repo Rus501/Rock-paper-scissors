@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Rock paper scissirs</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <h1>Game</h1>
+        <script>
+            function computerPlay() {
+                let choice = ['Rock', 'Paper', 'Scissors'];
+                return choice[Math.floor(Math.random() * choice.length)];
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                playerSelection = prompt('Make your choice', '');
+                computerSelection = computerPlay();
+
+                playerSelection = playerSelection.toLowerCase();
+                computerSelection = computerSelection.toLowerCase();
+
+                let userRock = playerSelection == 'rock';
+                let userPaper = playerSelection == 'paper';
+                let userScissors = playerSelection == 'scissors';
+
+                let computerRock = computerSelection == 'rock';
+                let computerPaper = computerSelection == 'paper';
+                let computerScissors = computerSelection == 'scissors';
+
+                if (userRock) {
+                    if (computerPaper) {
+                        return 'You lost! Paper beats Rock';
+                    } else if (computerScissors) {
+                        return 'You won! Rock beats scissors';
+                    } else { return 'It\'s a tie'}
+                }
+
+                if (userPaper) {
+                    if (computerPaper) {
+                        return 'It\'s a tie';
+                    } else if (computerScissors) {
+                        return 'You lost! Scissors beat Paper';
+                    } else { return 'You won! Paper beats Rock'}
+                }
+
+                if (userScissors) {
+                    if (computerPaper) {
+                        return 'You won! Scissors beat Paper';
+                    } else if (computerScissors) {
+                        return 'It\'s a tie';
+                    } else { return 'You lost! Rock beats Scissors'}
+                }
+            }
+
+            function game() {
+                for (let i = 0; i < 5; i++) {
+                    playRound();
+                    console.log( playRound() );
+                }
+            }
+
+            
+            //console.log( playRound(playerSelection, computerSelection) );
+            console.log( game() );
+        </script>
+    </body>
+</html>
