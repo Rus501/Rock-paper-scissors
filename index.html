@@ -6,21 +6,27 @@
     <body>
         <h1>Game</h1>
         <script>
+        	//randomizing computer's choice
             function computerPlay() {
                 let choices = ['rock', 'paper', 'scissors'];
                 return choices[Math.floor(Math.random() * choices.length)];
             }
 
+            //initializing some variables
             let playerScore = 0;
             let computerScore = 0;
 			let roundCount = 0;
 
+			//playing 1 round
             function playRound(playerSelection, computerSelection) {
             	playerSelection = prompt('What do you choose?', '');
             	computerSelection = computerPlay();
+
+            	//making user's prompt case unsensitive
             	playerSelection = playerSelection.toLowerCase();
             	computerSelection = computerSelection.toLowerCase();
 
+            	//some basic rock paper scissors rules
             	if ((playerSelection == 'rock' && computerSelection == 'scissors') || 
             		(playerSelection == 'paper' && computerSelection == 'rock') || 
             		(playerSelection == 'scissors' && computerSelection == 'paper')) {
@@ -38,8 +44,8 @@
             	}
             }
 
+            //final function
             function game() {
-
 				do {
 					playRound();
 					roundCount++;
@@ -53,8 +59,10 @@
 					console.log(`You lost the game. ${playerScore} to ${computerScore}.`);
 				}
 
+				//not sure bout this return?
 				return roundCount;
             }
+            //type game(); into console!
         </script>
     </body>
 </html>
