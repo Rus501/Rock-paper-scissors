@@ -1,4 +1,4 @@
 # Rock-paper-scissors
-The Odin project
-Final project
-Added some UI
+The Odin project <br/>
+Final project <br/>
+Added some UI <br/>
