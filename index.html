@@ -1,72 +1,37 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Rock paper scissirs</title>
-        <meta charset="UTF-8">
-    </head>
-    <body>
-        <h1>Game</h1>
-        <script>
-        	//randomizing computer's choice
-            function computerPlay() {
-                let choices = ['rock', 'paper', 'scissors'];
-                return choices[Math.floor(Math.random() * choices.length)];
-            }
-
-            //initializing some variables
-            let playerScore = 0;
-            let computerScore = 0;
-			let roundCount = 0;
-
-			//playing 1 round
-            function playRound(playerSelection, computerSelection) {
-            	playerSelection = prompt('What do you choose?', '');
-            	computerSelection = computerPlay();
-
-            	//making user's prompt case unsensitive
-            	playerSelection = playerSelection.toLowerCase();
-            	computerSelection = computerSelection.toLowerCase();
-
-            	//some basic rock paper scissors rules
-				let win = (playerSelection == 'rock' && computerSelection == 'scissors') || 
-            			  (playerSelection == 'paper' && computerSelection == 'rock') || 
-            			  (playerSelection == 'scissors' && computerSelection == 'paper');
-
-				let lose = (playerSelection == 'rock' && computerSelection == 'paper') || 
-            			   (playerSelection == 'paper' && computerSelection == 'scissors') || 
-            			   (playerSelection == 'scissors' && computerSelection == 'rock');
-
-            	if (win) {
-            		playerScore++;
-            		return console.log(`You win! ${playerSelection} beats ${computerSelection}.`);
-            	} else if (lose) {
-            		computerScore++;
-            		return console.log(`You lost. ${playerSelection} loses to ${computerSelection}.`);
-            	} else {
-            		playerScore++;
-            		computerScore++;
-            		return console.log(`It's a tie. ${playerSelection} vs ${computerSelection}`);
-            	}
-            }
-
-            //final function
-            function game() {
-				do {
-					playRound();
-					roundCount++;
-				} while (roundCount < 5);
-
-				if (playerScore > computerScore) {
-					console.log(`You won the game! ${playerScore} to ${computerScore}.`);
-				} else if (playerScore == computerScore) {
-					console.log(`It's a tie! ${playerScore} to ${computerScore}.`);
-				} else {
-					console.log(`You lost the game. ${playerScore} to ${computerScore}.`);
-				}
-
-				//not sure bout this return?
-				return roundCount;
-            }
-            //type game(); into console!
-        </script>
-    </body>
+<head>
+    <title>Rock, paper, scissors</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <main>
+        <div id="container">
+            <h1 id="title">Rock, paper, scissors</h1>
+            <div class="user-selection">
+            	<h2 class="name">Player's choice</h2>
+            	<div class="buttons">
+	            	<button id="btn" class="rock"></button>
+	            	<button id="btn" class="paper"></button>
+	            	<button id="btn" class="scissors"></button>
+	            </div>
+            </div>
+            <div class="AI-selection">
+            	<h2 class="name">Computer's choice</h2>
+            	<div class="buttons">
+	            	<button id="btn" class="rock2"></button>
+	            	<button id="btn" class="paper2"></button>
+	            	<button id="btn" class="scissors2"></button>
+	            </div>
+            </div>
+            <div class="result">
+            	<p class="result-text"></p>
+            	Current score:<p class="score">0 - 0</p>
+            	<p class="game-result"></p>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
 </html>
