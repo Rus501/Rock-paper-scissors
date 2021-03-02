@@ -1,4 +1,3 @@
 # Rock-paper-scissors
 The Odin project <br/>
-Final project <br/>
-Added some UI <br/>
+Live -> https://rus501.github.io/Rock-paper-scissors
