@@ -1,22 +1,22 @@
 const rock = document.querySelector('.rock');
-rock.addEventListener('click', playRound);
-
 const paper = document.querySelector('.paper');
-paper.addEventListener('click', playRound);
-
 const scissors = document.querySelector('.scissors');
-scissors.addEventListener('click', playRound);
-
 const rock2 = document.querySelector('.rock2');
 const paper2 = document.querySelector('.paper2');
 const scissors2 = document.querySelector('.scissors2');
-
 const score = document.querySelector('.score');
-
 const resultText = document.querySelector('.result-text');
-resultText.innerHTML = 'Go on - make a choice! First to reach 5 points wins.'
-
 const gameResult = document.querySelector('.game-result');
+const resetButton = document.querySelector('.reset');
+
+let playerScore = 0;
+let computerScore = 0;
+let roundCount = 0;
+
+rock.onclick = playRound;
+paper.onclick = playRound;
+scissors.onclick = playRound;
+resetButton.onclick = reset;
 
 //randomizing computer's choice
 function computerPlay() {
@@ -24,14 +24,19 @@ function computerPlay() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-//initializing some variables
-let playerScore = 0;
-let computerScore = 0;
-let roundCount = 0;
-
-//playing 1 round
+//playing one round
 function playRound(playerSelection, computerSelection) {
-	playerSelection = this.className;
+      if (playerScore === 5 || computerScore === 5) {
+            rock.classList.add('non-active');
+            paper.classList.add('non-active');
+            scissors.classList.add('non-active');
+            rock2.classList.remove('chosen');
+            paper2.classList.remove('chosen');
+            scissors2.classList.remove('chosen');
+            return;
+      }
+
+      playerSelection = this.className;
 	computerSelection = computerPlay();
 
       //highlight computer's choice
@@ -57,32 +62,44 @@ function playRound(playerSelection, computerSelection) {
 
 	if (win) {
 		playerScore++;
-            score.innerHTML = `${playerScore} - ${computerScore}`;
+            score.innerHTML = `Current score: ${playerScore} - ${computerScore}`;
 		resultText.innerHTML = `You win! ${playerSelection} beat(s) ${computerSelection}.`;
 	} else if (lose) {
 		computerScore++;
-            score.innerHTML = `${playerScore} - ${computerScore}`;
+            score.innerHTML = `Current score: ${playerScore} - ${computerScore}`;
 		resultText.innerHTML = `You lost. ${playerSelection} lose(s) to ${computerSelection}.`;
 	} else {
-		playerScore++;
-		computerScore++;
-            score.innerHTML = `${playerScore} - ${computerScore}`;
+		//playerScore++;
+		//computerScore++;
+            score.innerHTML = `Current score: ${playerScore} - ${computerScore}`;
 		resultText.innerHTML = `It's a tie. ${playerSelection} vs ${computerSelection}`;
 	}
 
-      if (gameResult.innerHTML > '') {
+      /*if (gameResult.innerHTML > '') {
             return gameResult.innerHTML = '';
-      }
+      }*/
 
       if (playerScore === 5 && computerScore < 5) {
-            return gameResult.innerHTML = `Congratulations! You've won the game!<br>
-                                           You can still continue playing for fun`; 
+            gameResult.innerHTML = `Congratulations! You've won the game!`;
       } else if (playerScore < 5 && computerScore === 5) {
-            return gameResult.innerHTML = `Unfortunate! You've lost the game!<br>
-                                           You can still continue playing for fun`;
+            gameResult.innerHTML = `Unfortunate! You've lost the game!`;
       } else if (playerScore === 5 && computerScore === 5) {
-            return gameResult.innerHTML = `It's a tie!<br>
-                                           You can still continue playing for fun`;
+            gameResult.innerHTML = `It's a tie!`;
       }
 }
-//console.log(gameResult.innerHTML > '');
+
+function reset() {
+      resetButton.classList.add('reset-pressed');
+      resetButton.onanimationend = () => resetButton.classList.remove('reset-pressed');
+      playerScore = 0;
+      computerScore = 0;
+      resultText.innerHTML = 'Go on - make a choice! First to reach 5 points wins.';
+      score.innerHTML = 'Current score: 0 - 0';
+      gameResult.innerHTML = '&nbsp;';
+      rock.classList.remove('non-active');
+      paper.classList.remove('non-active');
+      scissors.classList.remove('non-active');
+      rock2.classList.remove('chosen');
+      paper2.classList.remove('chosen');
+      scissors2.classList.remove('chosen');
+}
